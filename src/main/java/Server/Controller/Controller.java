@@ -1,9 +1,8 @@
 package Server.Controller;
 
-import Server.Model.Ingrediente;
-import Server.Model.Magazzino;
-import Server.Model.Menu;
+import Server.Model.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class Controller {
@@ -31,6 +30,15 @@ public class Controller {
             }
         }
         return isPresent;
+    }
+
+    public void nuovoOrdine(ArrayList<OrderItem> elementi, String numTavolo, String nomePersona, String cassiere, BigDecimal sconto){
+        Ordine ordine = new Ordine(Ordine.newId(), numTavolo, nomePersona, cassiere);
+        elementi.forEach(prodotto -> {
+            ordine.addToComanda(prodotto.getNome(), prodotto.getQuantita());
+            ordine.setPrezzo(ordine.getPrezzo().add(this.menu.getMenuItem(prodotto.getNome()).getPrezzo().multiply(BigDecimal.valueOf(prodotto.getQuantita()))));
+        });
+        ordine.setPrezzo(ordine.getPrezzo().subtract(sconto));
     }
 
 

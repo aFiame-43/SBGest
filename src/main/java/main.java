@@ -9,7 +9,7 @@ public class main {
         Scanner scanner = new Scanner(System.in);
         String input1 = scanner.nextLine();
         String input2 = scanner.nextLine();
-        Ordine ordine = new Ordine(1, "1", "Fiamma");
+        Ordine ordine = new Ordine(1, "1", "Fiamma", null);
         ordine.addToComanda(input1, Integer.parseInt(input2));
         System.out.println(ordine.toString());
     }

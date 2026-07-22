@@ -1,28 +1,39 @@
 package Server.Model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Ordine {
+    public static int contatoreOrdini = 0;
     private final int id;
     private StatoOrdine statoOrdine;
     private String numTavolo;
     private String nomePersona;
+    private BigDecimal prezzo;
+    private BigDecimal sconto;
     private final LocalDateTime oraCreazione;
     private LocalDateTime oraInvioCucina;
     private LocalDateTime oraPronto;
     private LocalDateTime oraConsegna;
-    private Cassiere cassiere;
+    private String cassiere;
 
     private final ArrayList<OrderItem> comanda = new ArrayList<>();
 
-    public Ordine (int id, String numTavolo, String nomePersona){
+    public Ordine (int id, String numTavolo, String nomePersona, String cassiere){
         this.id = id;
         this.numTavolo = numTavolo;
         this.nomePersona = nomePersona;
         this.statoOrdine = StatoOrdine.CREATO;
         this.oraCreazione = LocalDateTime.now();
+        this.cassiere = cassiere;
+        this.prezzo = BigDecimal.valueOf(0);
+        this.sconto = BigDecimal.valueOf(0);
+    }
+
+    public static int newId(){
+        contatoreOrdini++;
+        return contatoreOrdini;
     }
 
     public double getId() {
@@ -41,6 +52,14 @@ public class Ordine {
         return nomePersona;
     }
 
+    public BigDecimal getPrezzo() {
+        return prezzo;
+    }
+
+    public BigDecimal getSconto() {
+        return sconto;
+    }
+
     public LocalDateTime getOraCreazione() {
         return oraCreazione;
     }
@@ -57,7 +76,7 @@ public class Ordine {
         return oraConsegna;
     }
 
-    public Cassiere getCassiere() {
+    public String getCassiere() {
         return cassiere;
     }
 
@@ -77,6 +96,14 @@ public class Ordine {
         this.nomePersona = nomePersona;
     }
 
+    public void setPrezzo(BigDecimal prezzo) {
+        this.prezzo = prezzo;
+    }
+
+    public void setSconto(BigDecimal sconto) {
+        this.sconto = sconto;
+    }
+
     public void setOraInvioCucina(LocalDateTime oraInvioCucina) {
         this.oraInvioCucina = oraInvioCucina;
     }
@@ -89,24 +116,19 @@ public class Ordine {
         this.oraConsegna = oraConsegna;
     }
 
-    public void addToComanda(String item, int num) {
-        OrderItem orderItem = new OrderItem(item, num);
+    public void setCassiere(String cassiere) {
+        this.cassiere = cassiere;
+    }
+
+    public void addToComanda(String nome, int quantita) {
+        OrderItem orderItem = new OrderItem(nome, quantita);
         comanda.add(orderItem);
     }
 
-    @Override
-    public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-        return "Ordine{" +
-                "id=" + id +
-                ", statoOrdine=" + statoOrdine +
-                ", numTavolo='" + numTavolo + '\'' +
-                ", nomePersona='" + nomePersona + '\'' +
-                ", oraCreazione=" + oraCreazione.format(formatter) +
-                ", oraInvioCucina=" + oraInvioCucina +
-                ", oraPronto=" + oraPronto +
-                ", oraConsegna=" + oraConsegna +
-                ", comanda=" + comanda +
-                '}';
+    public void sendOrdine(){
+        this.setOraInvioCucina(LocalDateTime.now());
+        //altre azioni da definire
     }
+
+
 }

@@ -1,11 +1,15 @@
 package Server.Model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
-public class Piatto {
+public class MenuItem {
     private String nome;
-    private int prezzo;
+    private BigDecimal prezzo;
+    private Dipartimento dipartimento;
     private ArrayList<Ingrediente> ingredienti = new ArrayList<>();
+
+    public MenuItem(String nome, int prezzo){}
 
     public String getNome() {
         return nome;
@@ -15,11 +19,11 @@ public class Piatto {
         this.nome = nome;
     }
 
-    public int getPrezzo() {
+    public BigDecimal getPrezzo() {
         return prezzo;
     }
 
-    public void setPrezzo(int prezzo) {
+    public void setPrezzo(BigDecimal prezzo) {
         this.prezzo = prezzo;
     }
 
@@ -29,5 +33,13 @@ public class Piatto {
 
     public void setIngredienti(ArrayList<Ingrediente> ingredienti) {
         this.ingredienti = ingredienti;
+    }
+
+    public Dipartimento getDipartimento() {
+        return dipartimento;
+    }
+
+    public void setDipartimento(Dipartimento dipartimento) {
+        this.dipartimento = dipartimento;
     }
 }

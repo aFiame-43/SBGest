@@ -1,35 +1,27 @@
 package Server.Model;
 
 public class OrderItem {
-    private String item;
-    private int num;
+    private String nome;
+    private int quantita;
 
-    public OrderItem(String item, int num) {
-        this.item = item;
-        this.num = num;
+    public OrderItem(String nome, int quantita) {
+        this.nome = nome;
+        this.quantita = quantita;
     }
 
-    public String getItem() {
-        return item;
+    public String getNome() {
+        return nome;
     }
 
-    public int getNum() {
-        return num;
+    public int getQuantita() {
+        return quantita;
     }
 
-    public void setItem(String item) {
-        this.item = item;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public void setNum(int num) {
-        this.num = num;
-    }
-
-    @Override
-    public String toString() {
-        return "OrderItem{" +
-                "item='" + item + '\'' +
-                ", num=" + num +
-                '}';
+    public void setQuantita(int quantita) {
+        this.quantita = quantita;
     }
 }
