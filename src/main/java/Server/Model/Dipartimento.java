@@ -4,6 +4,10 @@ public class Dipartimento {
     private String nome;
     private int stampanteId;
 
+    public Dipartimento(String nome) {
+        this.nome = nome;
+    }
+
     public String getNome() {
         return nome;
     }

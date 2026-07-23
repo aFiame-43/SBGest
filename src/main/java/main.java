@@ -1,16 +1,18 @@
-import Server.Model.Ordine;
+import Server.Controller.Controller;
+import Server.Model.Magazzino;
+import Server.Model.Menu;
 
-import java.io.IOException;
-import java.util.Scanner;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class main {
-    public static void main(String[] args) throws IOException {
-        System.out.println("Inserire oggetti ordine");
-        Scanner scanner = new Scanner(System.in);
-        String input1 = scanner.nextLine();
-        String input2 = scanner.nextLine();
-        Ordine ordine = new Ordine(1, "1", "Fiamma", null);
-        ordine.addToComanda(input1, Integer.parseInt(input2));
-        System.out.println(ordine.toString());
+    public static void main(String[] args) throws Exception {
+        Magazzino magazzino = new Magazzino();
+        Menu menu = new Menu();
+
+        LinkedBlockingDeque<String> commandQueue = new LinkedBlockingDeque<>();
+        InputReaderGT ir = new InputReaderGT(commandQueue);
+        Controller controller = new Controller(magazzino, menu);
+        CliGT cli = new CliGT(ir, controller, commandQueue);
+        cli.run();
     }
 }

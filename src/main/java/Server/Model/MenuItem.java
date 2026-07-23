@@ -9,7 +9,10 @@ public class MenuItem {
     private Dipartimento dipartimento;
     private ArrayList<Ingrediente> ingredienti = new ArrayList<>();
 
-    public MenuItem(String nome, int prezzo){}
+    public MenuItem(String nome, BigDecimal prezzo){
+        this.nome = nome;
+        this.prezzo = prezzo;
+    }
 
     public String getNome() {
         return nome;

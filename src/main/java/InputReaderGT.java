@@ -3,7 +3,7 @@ import java.util.concurrent.BlockingQueue;
 
 public class InputReaderGT implements Runnable {
     private final BlockingQueue<String> commandQueue;
-    private volatile boolean acceptingInput = false;
+    private volatile boolean acceptingInput = true;
     private final Scanner scanner = new Scanner(System.in);
     private volatile boolean running = true;
     private boolean valid = true;
@@ -18,25 +18,10 @@ public class InputReaderGT implements Runnable {
             if (acceptingInput) {
                 if (scanner.hasNextLine()) {
                     String input = scanner.nextLine();
-                    while(input.equalsIgnoreCase("phase_changed") || input.equalsIgnoreCase("shipcheck") || input.equalsIgnoreCase("endgame")) {
-                        System.out.println("you can't use this command");
-                        valid = false;
-                        if(scanner.hasNextLine()) {
-                            input = scanner.nextLine();
-                        } else {
-                            try {
-                                Thread.sleep(100);
-                            } catch (InterruptedException e) {
-                                throw new RuntimeException(e);
-                            }
-                        }
-                    }
-                    if(valid) {
-                        try {
-                            commandQueue.put(input);
-                        } catch (InterruptedException e) {
-                            Thread.currentThread().interrupt();
-                        }
+                    try {
+                        commandQueue.put(input);
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
                     }
                 }
             } else {

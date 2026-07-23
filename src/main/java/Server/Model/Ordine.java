@@ -36,7 +36,7 @@ public class Ordine {
         return contatoreOrdini;
     }
 
-    public double getId() {
+    public int getId() {
         return id;
     }
 
@@ -130,5 +130,21 @@ public class Ordine {
         //altre azioni da definire
     }
 
-
+    @Override
+    public String toString() {
+        return "Ordine{" +
+                "id=" + id +
+                ", statoOrdine=" + statoOrdine +
+                ", numTavolo='" + numTavolo + '\'' +
+                ", nomePersona='" + nomePersona + '\'' +
+                ", prezzo=" + prezzo +
+                ", sconto=" + sconto +
+                ", oraCreazione=" + oraCreazione +
+                ", oraInvioCucina=" + oraInvioCucina +
+                ", oraPronto=" + oraPronto +
+                ", oraConsegna=" + oraConsegna +
+                ", cassiere='" + cassiere + '\'' +
+                ", comanda=" + comanda.toString() +
+                '}';
+    }
 }

@@ -24,4 +24,12 @@ public class OrderItem {
     public void setQuantita(int quantita) {
         this.quantita = quantita;
     }
+
+    @Override
+    public String toString() {
+        return "OrderItem{" +
+                "nome='" + nome + '\'' +
+                ", quantita=" + quantita +
+                '}';
+    }
 }
